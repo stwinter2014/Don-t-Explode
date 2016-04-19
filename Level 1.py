@@ -4,7 +4,7 @@ import Sprites
 
 def Level_1():
     pygame.init()
-    size = [700,430]
+    size = [900,630]
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption("Don't explode")
     done = False
@@ -15,16 +15,31 @@ def Level_1():
     y_g_check = False
     x_g_speed = 0
     y_g_speed = 0
+
+    x_g1_check = False
+    y_g1_check = False
+    x_g1_speed = 0
+    y_g1_speed = 0
     
     x_b_check = False
     y_b_check = False
     x_b_speed = 0
     y_b_speed = 0
+
+    x_b1_check = False
+    y_b1_check = False
+    x_b1_speed = 0
+    y_b1_speed = 0
     
     x_r_check = False
     y_r_check = False
     x_r_speed = 0
     y_r_speed = 0
+
+    x_r1_check = False
+    y_r1_check = False
+    x_r1_speed = 0
+    y_r1_speed = 0
     
     x_y_check = False
     y_y_check = False
@@ -75,6 +90,13 @@ def Level_1():
     pong_green.rect.y = random.randint(0, size[1] - guy_green.get_height())
     pong_green_list.add(pong_green)
     pong_all_list.add(pong_green)
+
+    pong_green1_list = pygame.sprite.Group()
+    pong_green1 = Sprites.Pong_green()
+    pong_green1.rect.x = random.randint(size[0] - guy_green.get_width() - 7, size[0] - guy_green.get_width())
+    pong_green1.rect.y = random.randint(0, size[1] - guy_green.get_height())
+    pong_green1_list.add(pong_green1)
+    pong_all_list.add(pong_green1)
     
     pong_blue_list = pygame.sprite.Group()
     pong_blue = Sprites.Pong_blue()
@@ -82,6 +104,13 @@ def Level_1():
     pong_blue.rect.y = random.randint(0, 7)
     pong_blue_list.add(pong_blue)
     pong_all_list.add(pong_blue)
+
+    pong_blue1_list = pygame.sprite.Group()
+    pong_blue1 = Sprites.Pong_blue()
+    pong_blue1.rect.x = random.randint(0, size[0] - guy_green.get_width())
+    pong_blue1.rect.y = random.randint(size[1] - guy_green.get_height() - 7, size[1] - guy_green.get_height())
+    pong_blue1_list.add(pong_blue1)
+    pong_all_list.add(pong_blue1)
     
     pong_red_list = pygame.sprite.Group()
     pong_red = Sprites.Pong_red()
@@ -89,6 +118,13 @@ def Level_1():
     pong_red.rect.y = random.randint(0, size[1] - guy_green.get_height())
     pong_red_list.add(pong_red)
     pong_all_list.add(pong_red)
+
+    pong_red1_list = pygame.sprite.Group()
+    pong_red1 = Sprites.Pong_red()
+    pong_red1.rect.x = random.randint(size[0] - guy_green.get_width() - 7, size[0] - guy_green.get_width())
+    pong_red1.rect.y = random.randint(0, size[1] - guy_green.get_height())
+    pong_red1_list.add(pong_red1)
+    pong_all_list.add(pong_red1)
     
     pong_yellow_list = pygame.sprite.Group()
     pong_yellow = Sprites.Pong_yellow()
@@ -104,7 +140,7 @@ def Level_1():
     pong_yellow1_list.add(pong_yellow1)
     pong_all_list.add(pong_yellow1)
     
-    explode_sound = pygame.mixer.Sound("rocket1.wav")
+    explode_sound = pygame.mixer.Sound("pop.wav")
     plus_sound = pygame.mixer.Sound("plus.wav")
     background = pygame.image.load('background.jpg').convert()
     gameover = pygame.image.load('gameover.jpg').convert()
@@ -131,6 +167,23 @@ def Level_1():
         elif y_g_check == False:
             y_g_speed = random.randint(0,3)
 
+        if pong_green1.rect.x >= size[0] - guy_green.get_width():
+            x_g1_check = True
+        elif pong_green1.rect.x <= 0:
+            x_g1_check = False
+        if pong_green1.rect.y >= size[1] - guy_green.get_height():
+            y_g1_check = True
+        elif pong_green1.rect.y <= 0:
+            y_g1_check = False
+        if x_g1_check == True:
+            x_g1_speed = - random.randint(0,3)
+        elif x_g1_check == False:
+            x_g1_speed = random.randint(0, 3)
+        if y_g1_check == True:
+            y_g1_speed = - random.randint(0,3)
+        elif y_g1_check == False:
+            y_g1_speed = random.randint(0,3)
+
         if pong_blue.rect.x >= size[0] - guy_green.get_width():
             x_b_check = True
         elif pong_blue.rect.x <= 0:
@@ -148,6 +201,23 @@ def Level_1():
         elif y_b_check == False:
             y_b_speed = random.randint(0,3)
 
+        if pong_blue1.rect.x >= size[0] - guy_green.get_width():
+            x_b1_check = True
+        elif pong_blue1.rect.x <= 0:
+            x_b1_check = False
+        if pong_blue1.rect.y >= size[1] - guy_green.get_height():
+            y_b1_check = True
+        elif pong_blue1.rect.y <= 0:
+            y_b1_check = False
+        if x_b1_check == True:
+            x_b1_speed = - random.randint(0,3)
+        elif x_b1_check == False:
+            x_b1_speed = random.randint(0, 3)
+        if y_b1_check == True:
+            y_b1_speed = - random.randint(0,3)
+        elif y_b1_check == False:
+            y_b1_speed = random.randint(0,3)
+
         if pong_red.rect.x >= size[0] - guy_green.get_width():
             x_r_check = True
         elif pong_red.rect.x <= 0:
@@ -164,6 +234,23 @@ def Level_1():
             y_r_speed = - random.randint(0,3)
         elif y_r_check == False:
             y_r_speed = random.randint(0,3)
+
+        if pong_red1.rect.x >= size[0] - guy_green.get_width():
+            x_r1_check = True
+        elif pong_red1.rect.x <= 0:
+            x_r1_check = False
+        if pong_red1.rect.y >= size[1] - guy_green.get_height():
+            y_r1_check = True
+        elif pong_red1.rect.y <= 0:
+            y_r1_check = False
+        if x_r1_check == True:
+            x_r1_speed = - random.randint(0,3)
+        elif x_r1_check == False:
+            x_r1_speed = random.randint(0, 3)
+        if y_r1_check == True:
+            y_r1_speed = - random.randint(0,3)
+        elif y_r1_check == False:
+            y_r1_speed = random.randint(0,3)
 
         if pong_yellow.rect.x >= size[0] - guy_green.get_width():
             x_y_check = True
@@ -207,7 +294,7 @@ def Level_1():
             seed.rect.y = random.randint(0, size[1] - claw_image.get_height())
             seed_list.add(seed)
         if timer > 180:
-            claw_hit_list = pygame.sprite.spritecollide(claw, pong_all_list, True)
+            claw_hit_list = pygame.sprite.spritecollide(claw, pong_all_list, False)
             for pong_green in claw_hit_list:
                 explode_sound.play()
                 stop = True
@@ -240,8 +327,11 @@ def Level_1():
                 claw_list.remove(claw)
         if stop == False:
             pong_green_list.update(x_g_speed, y_g_speed)
+            pong_green1_list.update(x_g1_speed, y_g1_speed)
             pong_blue_list.update(x_b_speed, y_b_speed)
+            pong_blue1_list.update(x_b1_speed, y_b1_speed)
             pong_red_list.update(x_r_speed, y_r_speed)
+            pong_red1_list.update(x_r1_speed, y_r1_speed)
             pong_yellow_list.update(x_y_speed, y_y_speed)
             pong_yellow1_list.update(x_y1_speed, y_y1_speed)
             claw.rect.x = pygame.mouse.get_pos()[0] - claw_image.get_width()//2
@@ -262,8 +352,11 @@ def Level_1():
         screen.blit(text,[550, 30])
         screen.blit(text1, [650,30])
         pong_green_list.draw(screen)
+        pong_green1_list.draw(screen)
         pong_blue_list.draw(screen)
+        pong_blue1_list.draw(screen)
         pong_red_list.draw(screen)
+        pong_red1_list.draw(screen)
         pong_yellow_list.draw(screen)
         pong_yellow1_list.draw(screen)
         claw_list.draw(screen)
